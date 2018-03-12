@@ -108,10 +108,11 @@ class TrapezoidalLR(Callback):
         logs = logs or {}
         self.trn_iterations += 1
         self.tlr_iterations += 1
-        K.set_value(self.model.optimizer.lr, self.tlr())
 
         self.history.setdefault('lr', []).append(K.get_value(self.model.optimizer.lr))
         self.history.setdefault('iterations', []).append(self.trn_iterations)
 
         for k, v in logs.items():
             self.history.setdefault(k, []).append(v)
+
+        K.set_value(self.model.optimizer.lr, self.tlr())
